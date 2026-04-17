@@ -13,11 +13,16 @@ trigger:
 
 ## 概述
 
-本技能允许 Hermes Agent 动态切换到 AI API Proxy 提供的各种高级模型（如 gpt-5.2、claude-sonnet-4-6 等），而无需修改 Hermes 的核心配置文件。
+本技能允许 Hermes Agent 动态切换到 AI API Proxy 提供的各种高级模型（如 gpt-5.2、claude-sonnet-4-6、gpt-5.3-codex 等），而无需修改 Hermes 的核心配置文件。
+
+**特别适合中国用户**：基础LLM使用DeepSeek（国内可用），需要时通过AI API Proxy访问国外高级模型。
 
 ## 工作原理
 
-使用 OpenRouter provider 作为适配器，通过环境变量覆盖实现动态切换。
+使用 OpenRouter provider 作为适配器，通过环境变量覆盖实现动态切换。智能路由逻辑：
+- 默认使用DeepSeek（国内用户友好）
+- 指定高级模型时自动通过AI API Proxy访问
+- 解决国内用户访问国外LLM的网络限制问题
 
 ## 前提条件
 
@@ -39,9 +44,19 @@ hermes chat --skills ai-api-proxy-switch --model gpt-5.2 --query "你的问题"
 hermes chat --skills ai-api-proxy-switch --model claude-sonnet-4-6 --query "你的问题"
 ```
 
-### 使用 gemini-3.1-pro-preview-thinking 模型
+### 使用 gpt-5.3-codex 模型（代码开发优化）
 ```bash
-hermes chat --skills ai-api-proxy-switch --model gemini-3.1-pro-preview-thinking --query "你的问题"
+hermes chat --skills ai-api-proxy-switch --model gpt-5.3-codex --query "你的代码问题"
+```
+
+### 使用 gpt-5-mini 模型（轻量级推理）
+```bash
+hermes chat --skills ai-api-proxy-switch --model gpt-5-mini --query "你的问题"
+```
+
+### 使用 gemini-3-flash-preview 模型（快速响应）
+```bash
+hermes chat --skills ai-api-proxy-switch --model gemini-3-flash-preview --query "你的问题"
 ```
 
 ## 环境变量配置方法
@@ -89,8 +104,11 @@ hermes chat --provider openrouter --model gpt-5.2 --query "你的问题"
 2. **错误：模型不可用**
    - 解决：检查模型名称是否正确
 
-3. **API 调用失败**
-   - 解决：检查 API Key 是否有效
+4. **状态栏显示问题**
+   - 现象：状态栏显示"deepseek-chat"而不是当前模型
+   - 原因：Hermes界面缓存默认配置
+   - 验证：界面中央显示"模型名称 · Nous Research"即为成功
+   - 解决：实际调用已成功，显示问题可忽略
 
 ## 注意事项
 
