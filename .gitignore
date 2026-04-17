@@ -1,0 +1,92 @@
+# Hermes Agent Skill: AI API Proxy Switch
+# Git ignore rules for skill repository
+
+# Environment files
+.env
+.env.local
+.env.*
+!.env.example
+
+# API Keys and secrets
+*.key
+*.pem
+*.cert
+secrets/
+credentials/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Hermes specific
+hermes.log
+agent.log
+
+# Skill specific
+# Don't ignore the skill structure
+# !SKILL.md
+# !references/
+# !scripts/
+# !examples/
+# !docs/
